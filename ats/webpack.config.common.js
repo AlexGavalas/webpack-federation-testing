@@ -18,7 +18,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "app1",
       remotes: {
-        app2: "app2@http://localhost:3002/remoteEntry.js",
+        'job_editor': "job_editor@http://localhost:3002/remoteEntry.js",
       },
       shared: {
         react: {

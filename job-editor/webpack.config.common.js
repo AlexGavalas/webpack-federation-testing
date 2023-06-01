@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "app2",
+      name: "job_editor",
       filename: "remoteEntry.js",
       exposes: {
         "./app": "./src/app",

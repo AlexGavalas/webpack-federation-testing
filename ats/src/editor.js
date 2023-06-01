@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { importRemote, injectScript } from "@module-federation/utilities";
 
 // const dynamicContainer = injectScript({
-//   global: "app2",
+//   global: "job_editor",
 //   url: `http://localhost:3002/remoteEntry.js`,
 // }).then((container) => {
 //   return container.get("./app").then((factory) => {
@@ -11,13 +11,13 @@ import { importRemote, injectScript } from "@module-federation/utilities";
 // });
 
 const RemoteApp = lazy(
-  // () => import("app2/app")
+  // () => import("job_editor/app")
   // () => dynamicContainer
   () =>
     importRemote({
       url: "http://localhost:3002",
       bustRemoteEntryCache: false,
-      scope: "app2",
+      scope: "job_editor",
       module: "app",
     })
 );
