@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
-import { importRemote, injectScript } from "@module-federation/utilities";
+import { importRemote } from "@module-federation/utilities";
 
+// import { injectScript } from "@module-federation/utilities";
 // const dynamicContainer = injectScript({
 //   global: "job_editor",
 //   url: `http://localhost:3002/remoteEntry.js`,
@@ -22,8 +23,10 @@ const RemoteApp = lazy(
     })
 );
 
-export default (props) => (
+const Editor = (props) => (
   <Suspense fallback={<span>loading</span>}>
     <RemoteApp {...props} />
   </Suspense>
 );
+
+export default Editor;

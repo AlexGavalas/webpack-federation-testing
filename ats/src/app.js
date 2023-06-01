@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import PropTypes from "prop-types";
 import Editor from "./editor";
 
 const App = ({ onClick }) => {
@@ -19,6 +20,10 @@ const App = ({ onClick }) => {
       </Suspense>
     </div>
   );
+};
+
+App.propTypes = {
+  onClick: PropTypes.func,
 };
 
 export default App;
