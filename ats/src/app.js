@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-const RemoteApp = React.lazy(() => import("app2/app"));
+import Editor from "./editor";
 
-const App = () => {
+const App = ({ onClick }) => {
   return (
     <div>
       <div
@@ -14,8 +14,8 @@ const App = () => {
       >
         <h1>ATS</h1>
       </div>
-      <Suspense fallback={"loading..."}>
-        <RemoteApp />
+      <Suspense fallback={<span>loading</span>}>
+        <Editor onClick={onClick} />
       </Suspense>
     </div>
   );
