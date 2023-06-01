@@ -1,47 +1,20 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ModuleFederationPlugin } = require("webpack").container;
-const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
+const { merge } = require("webpack-merge");
+const commonConfig = require("./webpack.config.common");
 
-module.exports = {
-  entry: "./src/index",
-  mode: "development",
-  devServer: {
-    static: path.join(__dirname, "dist"),
-    port: 3002,
-  },
-  output: {
-    publicPath: "auto",
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        loader: "babel-loader",
-        exclude: /node_modules/,
-        options: {
-          presets: ["@babel/preset-react"],
+module.exports = merge(commonConfig, {
+  mode: "production",
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+        terserOptions: {
+          format: {
+            comments: false,
+          },
         },
-      },
+      }),
     ],
   },
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "app2",
-      filename: "remoteEntry.js",
-      exposes: {
-        "./app": "./src/app",
-      },
-      shared: {
-        react: {
-          singleton: true,
-        },
-        "react-dom": {
-          singleton: true,
-        },
-      },
-    }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-    }),
-  ],
-};
+});

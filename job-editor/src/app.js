@@ -1,6 +1,10 @@
 import React from "react";
 
-const App = () => {
+const App = ({ onClick }) => {
+  const onClickHandler = () => {
+    onClick?.();
+  };
+
   return (
     <div>
       <div
@@ -12,6 +16,7 @@ const App = () => {
         }}
       >
         <h1>Job Editor</h1>
+        <button onClick={onClickHandler}>Click here</button>
       </div>
     </div>
   );
