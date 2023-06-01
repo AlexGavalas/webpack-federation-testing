@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const App = ({ onClick }) => {
   const onClickHandler = () => {
@@ -20,6 +21,10 @@ const App = ({ onClick }) => {
       </div>
     </div>
   );
+};
+
+App.propTypes = {
+  onClick: PropTypes.func,
 };
 
 export default App;
