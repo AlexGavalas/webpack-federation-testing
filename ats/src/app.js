@@ -1,24 +1,38 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import PropTypes from "prop-types";
 import Editor from "./editor";
+import { importModule, dynamicImport, lazyImportComponent } from "./federation";
+import "./app.css";
+
+const { useJob } = importModule("job_editor/hook");
+const LazyDemo = lazyImportComponent("job_editor/lazy", "LazyDemo");
 
 const App = ({ onClick }) => {
+  const [count, setCount] = useState(0);
+  const { job } = useJob();
+
+  const handleClick = async () => {
+    const { doSomething } = await dynamicImport("job_editor/lazy-helper");
+
+    doSomething();
+    onClick();
+
+    setCount((c) => c + 1);
+  };
+
+  const showLazy = count % 2 !== 0;
+
   return (
-    <div>
-      <div
-        style={{
-          margin: "10px",
-          padding: "10px",
-          textAlign: "center",
-          backgroundColor: "rebeccapurple",
-        }}
-      >
+    <>
+      <div className="container">
         <h1>ATS</h1>
+        <h2>ID: {job.id}</h2>
       </div>
-      <Suspense fallback={<span>loading</span>}>
-        <Editor onClick={onClick} />
+      <Suspense fallback={"Loading ..."}>
+        <Editor onClick={handleClick} />
       </Suspense>
-    </div>
+      <Suspense fallback={"Loading ..."}>{showLazy && <LazyDemo />}</Suspense>
+    </>
   );
 };
 

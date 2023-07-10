@@ -6,7 +6,10 @@ module.exports = merge(commonConfig, {
   mode: "development",
   devServer: {
     static: "dist",
-    port: 3002,
+    port: 4002,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

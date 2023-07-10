@@ -12,25 +12,16 @@ module.exports = {
           presets: ["@babel/preset-react"],
         },
       },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "app1",
       remotes: {
-        'job_editor': "job_editor@http://localhost:3002/remoteEntry.js",
-      },
-      shared: {
-        react: {
-          eager: true,
-          requiredVersion: "16.14.0",
-          singleton: true,
-        },
-        "react-dom": {
-          eager: true,
-          requiredVersion: "16.14.0",
-          singleton: true,
-        },
+        job_editor: "job_editor@http://localhost:4002/remoteEntry.js",
       },
     }),
   ],

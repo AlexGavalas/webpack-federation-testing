@@ -7,7 +7,10 @@ module.exports = merge(commonConfig, {
   mode: "development",
   devServer: {
     static: "dist",
-    port: 3001,
+    port: 4001,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
   },
   resolve: {
     fallback: {
